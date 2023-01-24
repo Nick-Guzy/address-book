@@ -6,12 +6,30 @@ function AddressBook() {
 }
 
 AddressBook.prototype.addContact = function(contact) {
-  this.contacts[contact.firstName] = contact;
+  contact.id = this.assignId();
+  this.contacts[contact.id] = contact;
 };
 
 AddressBook.prototype.assignId = function() {
   this.currentId += 1;
   return this.currentId;
+};
+
+//Business logic to find contact test
+AddressBook.prototype.findContact = function(id) {
+  if (this.contacts[id] !== undefined) {
+    return this.contacts[id];
+  }
+  return false;
+};
+
+//Business logic to delete contact
+AddressBook.prototype.deleteContact = function(id) {
+  if (this.contacts[id] === undefined) {
+    return false;
+  }
+  delete this.contacts[id];
+  return true;
 };
 
 //Bussiness Logic for Contacts
